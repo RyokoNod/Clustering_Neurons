@@ -16,3 +16,4 @@ The dataset in this repo is from the [original work](https://github.com/berensla
 The entire dataset and codes listed below (with slight modifications) are from the original work.
 
 * ```allen-data-preprocess-mod.ipynb``` (this one is slightly modified from original)
+* ```rnaseqTools.py```
