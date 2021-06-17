@@ -4,3 +4,5 @@
 .DS_Store
 
 code/__pycache__/
+
+figures/sanity-checks/ttype-assignment/
