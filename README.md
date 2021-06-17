@@ -10,6 +10,7 @@ The dataset in this repo is from the [original work](https://github.com/berensla
 ## How to run the analysis
 
 1. Run ```allen-data-preprocess-mod.ipynb``` to preprocess the Allen Institute data. This notebook contains instructions on additional files you will need.
+2. Run ```patch-seq-data-load.ipynb``` to load all the data and package together into a Python object.
 
 ## About the dataset and the code
 
