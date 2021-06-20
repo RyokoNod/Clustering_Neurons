@@ -12,6 +12,7 @@ The dataset in this repo is from the [original work](https://github.com/berensla
 1. Run ```allen-data-preprocess-mod.ipynb``` to preprocess the Allen Institute data. This notebook contains instructions on additional files you will need.
 2. Run ```patch-seq-data-load.ipynb``` to load all the data and package together into a Python object.
 3. Run ```ttype-assignment.ipynb``` to assign all cells to the t-types. This also creates a lot of image files.
+4. Run ```preprocess-ephys-files-mod.ipynb``` to extract the electrophysiological features and create ```three_traces.pickle```. This notebook contains instructions on additional files you will need.
 
 ## About the dataset and the code
 
@@ -21,3 +22,4 @@ The entire dataset and codes listed below (some with slight modifications) are b
 * ```rnaseqTools.py```
 * ```patch-seq-data-load.ipynb```
 * ```ttype-assignment.ipynb```
+* ```preprocess-ephys-files-mod.ipynb``` (this one is also modified from original)
