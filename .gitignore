@@ -6,3 +6,5 @@
 code/__pycache__/
 
 figures/sanity-checks/ttype-assignment/
+
+code/scikit_clusterings/__pycache__/
