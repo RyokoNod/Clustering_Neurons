@@ -116,3 +116,4 @@ def plot_sidebyside(clusters, Z, m1data, title, reftitle="", figsize=(5,2)):
         plot_fig1c(Z, m1data)
     else:
         plot_fig1c(Z, m1data, reftitle)
+    plt.show()
