@@ -86,14 +86,15 @@ def plot_fig1c(Z, m1data,title="Fig1c from Scala et al."):
     plt.title(title)
     
 
-def plot_sidebyside(clusters, Z, m1data, title, reftitle="", figsize=(5,2)):
+def plot_sidebyside(training_data, clusters, Z, m1data, title, reftitle="", figsize=(5,2)):
     """
-    This function plots figure 1c  from Scala et al. with new cluster assignments
-    and the original version side by side
+    This function plots figure 1c from Scala et al. with new cluster assignments
+    and the original version side by side. Only for Yao et al.'s data.
     
     Arguments:
+    - training_data: the training data corresponding to the cluster assignments
     - clusters: new cluster assignments
-    - Z: the t-SNE representations from Scala et al.
+    - Z: the t-SNE representations for Yao et al.'s 15,511 cells
     - m1data: Yao et al.'s dataset for the subroup "viplamp"
     - title: title for the new cluster assignments
     - reftitle: if you want anything other than "Fig1c from Scala et al." for the
@@ -107,7 +108,7 @@ def plot_sidebyside(clusters, Z, m1data, title, reftitle="", figsize=(5,2)):
     plt.subplot(1, 2, 1)
     plt.xticks([])
     plt.yticks([])
-    plt.scatter(Z[:, 0], Z[:, 1], c=clusters,s=0.5)
+    plt.scatter(training_data[:, 0], training_data[:, 1], c=clusters,s=0.5)
     sns.despine(left=True, bottom=True)
     plt.title(title)
     
