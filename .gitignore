@@ -8,3 +8,7 @@ code/__pycache__/
 figures/sanity-checks/ttype-assignment/
 
 code/scikit_clusterings/__pycache__/
+
+code/scikit_clusterings/models/t-SNE/broad/Scala/
+
+code/scikit_clusterings/models/t-SNE/broad/Yao/
