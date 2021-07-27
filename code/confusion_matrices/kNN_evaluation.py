@@ -2,6 +2,7 @@ import numpy as np
 import pylab as plt
 import seaborn as sns; sns.set()
 import matplotlib
+from sklearn.metrics import adjusted_mutual_info_score,fowlkes_mallows_score
 
 def sns_styleset():
     sns.set(context='paper', style='ticks', font='Arial')
@@ -132,10 +133,12 @@ def kNN_confusion_matrix_tt(pred, labels, cell_selector, layerset, cutoff=10, re
             C[t,:] = 0
             num = 0
             for i in np.where(ind)[0]:
-                u, count = np.unique(labels[pred[i,:]], return_counts=True)
-                if u[np.argmax(count)] in np.arange(clusterN):
-                    num += 1
-                    C[t, u[np.argmax(count)]] += 1
+                neighbor_labels = [label for label in labels[pred[i,:]] if label in np.arange(clusterN)]
+                #u, count = np.unique(labels[pred[i,:]], return_counts=True)
+                u, count = np.unique(neighbor_labels, return_counts=True)
+                #if u[np.argmax(count)] in np.arange(clusterN):
+                num += 1
+                C[t, u[np.argmax(count)]] += 1
             C[t,:] /= num
 
     return C
@@ -236,4 +239,52 @@ def kNN_plot_cm_tt(cm_dict, titles, clusterNames, figsize):
         plt.title(titles[mode], y=1.07)
         cnt +=1
     plt.tight_layout()
+    
+def evaluate_ami_fms(kNN_dict, label_dict, titles, class_list):
+    """
+    A function to calculate the adjusted mutual information and Fowlkes-Mallows score of
+    the given kNN assignments. Can be used for both family assignments and ttype assignments.
+    
+    Arguments:
+    - kNN_dict: a dictionary that contains the k nearest neighbors of each cell
+    - label_dict: a dictionary that has the ground truth labels
+    - titles: the dictionary used to give a title to the printed text. Make sure it has the same keys as label_dict
+    - class_list: for family assignments, the list of family names. Number of ttypes for ttype assignment
+    
+    Returns:
+    - pred: a dictionary of the predictions based on the k nearest neighbors
+    - AMI: the adjusted mutual information score
+    - FMS: the Fowlkes-Mallows score
+    """
+    pred_dict = {}
+    AMI_dict = {}
+    FMS_dict = {}
+    
+    if type(class_list)== int:
+        class_list = np.arange(class_list)
+
+    for mode in label_dict.keys():
+        print(f"--------------------------{titles[mode]}--------------------------")
+        pred = []
+        labels = label_dict[mode]
+        neighbors=kNN_dict[mode]
+
+        for cell in neighbors:
+            # in case the nearest neighbors contain nan or a family other than the ones in the list, remove them
+            neighbor_labels = [label for label in labels[cell] if label in class_list]
+            t, vote = np.unique(neighbor_labels, return_counts=True) # get the "votes" for the nearest neighbor assignment
+            pred.append(t[np.argmax(vote)]) # assign the result of the majority vote
+        pred = np.array(pred)
+
+        AMI = adjusted_mutual_info_score(pred, labels)
+        FMS = fowlkes_mallows_score(pred, labels)
+        print("Adjusted Mutual Info:", AMI)
+        print("Fowlkes-Mallows Score:", FMS,"\n")
+
+        pred_dict[mode] = pred
+        AMI_dict[mode] = AMI
+        FMS_dict[mode] = FMS
+    
+    return pred, AMI, FMS
+
     
