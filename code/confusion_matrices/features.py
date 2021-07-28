@@ -136,3 +136,53 @@ def get_morph_features(m1, ttypes):
     morphTsneData[excCells & keepcells, inhPC.shape[1]*2+inhZPC.shape[1]:inhPC.shape[1]*2+inhZPC.shape[1]*2] = excZPC
     
     return morphTsneData, keepcells
+ 
+def combine2features(featureset1, featureset2, keepcells1, keepcells2):
+    """
+    Returns a combination of 2 features and a Boolean matrix that gets cells that are valid for analysis.
+    """
+    combinedFeatures = np.concatenate((featureset1, featureset2), axis=1)
+    keepcells = keepcells1 & keepcells2 & ~np.isnan(np.sum(combinedFeatures,axis=1))
+    return combinedFeatures, keepcells
+    
+def combine3features(featureset1, featureset2, featureset3, keepcells1, keepcells2, keepcells3):
+    """
+    Returns a combination of all features and a Boolean matrix that gets cells that are valid for analysis.
+    """
+    combinedFeatures = np.concatenate((featureset1, featureset2, featureset3), axis=1)
+    keepcells = keepcells1 & keepcells2 & keepcells3 & ~np.isnan(np.sum(combinedFeatures,axis=1))
+    return combinedFeatures, keepcells
+
+def get_feature_dict(m1, ttypes):
+    feature_matrices = {}
+    cell_filters = {}
+    
+    feature_matrix, cell_filter = get_transcriptomic_features(m1, ttypes)
+    feature_matrices["t"] = feature_matrix
+    cell_filters["t"] = cell_filter
+    
+    feature_matrix, cell_filter = get_ephys_features(m1, ttypes)
+    feature_matrices["e"] = feature_matrix
+    cell_filters["e"] = cell_filter
+    
+    feature_matrix, cell_filter = get_morph_features(m1, ttypes)
+    feature_matrices["m"] = feature_matrix
+    cell_filters["m"] = cell_filter
+    
+    feature_matrix, cell_filter = combine2features(feature_matrices["t"], feature_matrices["e"],cell_filters["t"], cell_filters["e"])
+    feature_matrices["te"] = feature_matrix
+    cell_filters["te"] = cell_filter
+    
+    feature_matrix, cell_filter = combine2features(feature_matrices["t"], feature_matrices["m"],cell_filters["t"], cell_filters["m"])
+    feature_matrices["tm"] = feature_matrix
+    cell_filters["tm"] = cell_filter
+    
+    feature_matrix, cell_filter = combine2features(feature_matrices["e"], feature_matrices["m"],cell_filters["e"], cell_filters["m"])
+    feature_matrices["em"] = feature_matrix
+    cell_filters["em"] = cell_filter
+    
+    feature_matrix, cell_filter = combine3features(feature_matrices["t"], feature_matrices["e"], feature_matrices["m"], cell_filters["t"], cell_filters["e"], cell_filters["m"])
+    feature_matrices["tem"] = feature_matrix
+    cell_filters["tem"] = cell_filter
+    
+    return feature_matrices, cell_filters
