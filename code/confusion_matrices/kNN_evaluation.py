@@ -156,7 +156,7 @@ def kNN_plot_cm_ff(cm_dict, classes, titles, figsize):
     plt.figure(figsize=figsize)
     cnt = 1
     for mode, C in cm_dict.items():
-        ax = plt.subplot(2,3,cnt )
+        ax = plt.subplot(3,3,cnt )
         
         plt.sca(ax)
         plt.imshow(C, vmin=0, vmax=1, cmap=plt.get_cmap('Greys'))
@@ -193,7 +193,7 @@ def kNN_plot_cm_tf(cm_dict, classes, titles, clusterNames, figsize):
     plt.figure(figsize=figsize)
     cnt = 1
     for mode, C in cm_dict.items():
-        ax = plt.subplot(6,1,cnt)
+        ax = plt.subplot(7,1,cnt)
         aboveCutoff = ~np.isnan(C[:,0]) # plot only where there are values in the confusion matrix
 
         # settings for the axes
@@ -224,7 +224,7 @@ def kNN_plot_cm_tt(cm_dict, titles, clusterNames, figsize):
     plt.figure(figsize=figsize)
     cnt = 1
     for mode, C in cm_dict.items():
-        ax = plt.subplot(3,2,cnt)
+        ax = plt.subplot(3,3,cnt)
         aboveCutoff = ~np.isnan(C[:,0]) # plot only where there are values in the confusion matrix
 
         plt.sca(ax)
