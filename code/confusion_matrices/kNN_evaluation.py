@@ -2,7 +2,7 @@ import numpy as np
 import pylab as plt
 import seaborn as sns; sns.set()
 import matplotlib
-from sklearn.metrics import adjusted_mutual_info_score,fowlkes_mallows_score
+from sklearn.metrics import accuracy_score,fowlkes_mallows_score
 
 def sns_styleset():
     sns.set(context='paper', style='ticks', font='Arial')
@@ -240,7 +240,7 @@ def kNN_plot_cm_tt(cm_dict, titles, clusterNames, figsize):
         cnt +=1
     plt.tight_layout()
     
-def evaluate_ami_fms(kNN_dict, label_dict, titles, class_list):
+def evaluate_acc_fms(kNN_dict, label_dict, titles, class_list):
     """
     A function to calculate the adjusted mutual information and Fowlkes-Mallows score of
     the given kNN assignments. Can be used for both family assignments and ttype assignments.
@@ -253,11 +253,11 @@ def evaluate_ami_fms(kNN_dict, label_dict, titles, class_list):
     
     Returns:
     - pred: a dictionary of the predictions based on the k nearest neighbors
-    - AMI: the adjusted mutual information score
+    - ACC: the accuracy score
     - FMS: the Fowlkes-Mallows score
     """
     pred_dict = {}
-    AMI_dict = {}
+    ACC_dict = {}
     FMS_dict = {}
     
     if type(class_list)== int:
@@ -276,15 +276,15 @@ def evaluate_ami_fms(kNN_dict, label_dict, titles, class_list):
             pred.append(t[np.argmax(vote)]) # assign the result of the majority vote
         pred = np.array(pred)
 
-        AMI = adjusted_mutual_info_score(pred, labels)
+        ACC = accuracy_score(pred, labels)
         FMS = fowlkes_mallows_score(pred, labels)
-        print("Adjusted Mutual Info:", AMI)
+        print("Accuracy:", ACC)
         print("Fowlkes-Mallows Score:", FMS,"\n")
 
         pred_dict[mode] = pred
-        AMI_dict[mode] = AMI
+        ACC_dict[mode] = ACC
         FMS_dict[mode] = FMS
     
-    return pred, AMI, FMS
+    return pred, ACC, FMS
 
     
