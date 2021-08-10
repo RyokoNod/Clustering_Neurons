@@ -20,3 +20,5 @@ code/scikit_clusterings/models/t-SNE/ttypes/Scala/
 code/scratch_notebooks/
 
 code/confusion_matrices/__pycache__/
+
+data/trash/
