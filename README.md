@@ -11,10 +11,11 @@ The dataset in this repo is from the [original work](https://github.com/berensla
 
 ### Preprocessing
 
-1. Run ```allen-data-preprocess-mod.ipynb``` to preprocess the Allen Institute data. This notebook contains instructions on additional files you will need.
-2. Run ```patch-seq-data-load.ipynb``` to load all the data and package together into a Python object.
-3. Run ```ttype-assignment.ipynb``` to assign all cells to the t-types. This also creates a lot of image files.
-4. Run ```preprocess-ephys-files-mod.ipynb``` to extract the electrophysiological features and create ```three_traces.pickle```. This notebook contains instructions on additional files you will need.
+1. Before you do anything, clone the FIt-SNE repository at https://github.com/KlugerLab/FIt-SNE and place it at the same directory path as this repo. After cloning, follow the instructions on README to compile everything. Note that you need gfortran and FFTW installed to get the repo set up. If you find the README somewhat unclear, this Kaggle page may help you get started: https://www.kaggle.com/returnofsputnik/mnist-2d-t-sne-with-fit-sne-cpu-only.
+2. Run ```allen-data-preprocess-mod.ipynb``` to preprocess the Allen Institute data. **(Update: as of summer 2021, most of this process can be skipped. Find more instrucitons inside the notebook)**
+3. Run ```patch-seq-data-load.ipynb``` to load all the data and package together into a Python object.
+4. Run ```ttype-assignment.ipynb``` to assign all cells to the t-types. This also creates a lot of image files.
+5. Run ```preprocess-ephys-files-mod.ipynb``` to extract the electrophysiological features and create ```three_traces.pickle```. **(Update: as of summer 2021, most of this process can be skipped. Find more instrucitons inside the notebook)**
 
 ### Analysis
 
