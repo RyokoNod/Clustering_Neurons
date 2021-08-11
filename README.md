@@ -20,7 +20,7 @@ The dataset in this repo is from the [original work](https://github.com/berensla
 ### Analysis
 
 1. To see what happens when you run different clustering methods on transcriptomic data, run ```codes/scikit_clusterings/scikit_tsne_viplamp.ipynb```. This tests [sci-kit learn clustering methods](https://scikit-learn.org/stable/modules/clustering.html) on the t-SNE representations of the original article, Figure 1c. If you find the article, dataset, or figure confusing, refer to ```about_figure_1c.ipynb``` - this breaks things down a bit.
-2. From the data science prespective, there seems to be some evaluations missing for the kNN clusterings in the original article. ```revisit-confusion-matrices.ipynb``` breaks down what is done in the original article and then adds some figures to confirm if the conclusion of the article is true.
+2. From the data science perspective, there needs to be more on confusion matrices in the original article. ```codes/confusion/matrices/revisit-confusion-matrices.ipynb``` breaks down what is done in the original article and then adds some figures to confirm if the conclusion of the article is true.
 
 ## About the borrowed datasets and the codes
 
