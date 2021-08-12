@@ -3,6 +3,8 @@
 A summer project that explores the recent findings on families of neurons.<br>
 This is based on a Nature article by Scala, F., Kobak, D., Bernabucci, M. *et al.* The original article can be found [here](https://rdcu.be/cmgFA).
 
+![Image of Yaktocat](https://github.com/RyokoNod/Clustering_Neurons/blob/main/figures/sample-figure.png)
+
 ## The dataset
 
 The dataset in this repo is from the [original work](https://github.com/berenslab/mini-atlas). Additional instructions on downloading data can be found in the Jupyter notebooks.
